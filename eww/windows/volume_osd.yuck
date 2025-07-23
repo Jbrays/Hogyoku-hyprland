@@ -1,0 +1,5 @@
+(defwindow volume_osd
+  :monitor 0
+  :geometry (geometry :x "0" :y "35%" :anchor "bottom center")
+  :stacking "overlay"
+  (volume_osd))

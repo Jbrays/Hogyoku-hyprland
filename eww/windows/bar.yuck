@@ -1,0 +1,13 @@
+(defwindow bar
+	:monitor 0
+	:windowtype "dock"
+	:reserve (struts :side "left" :distance "65px")
+	:geometry (geometry :x "8px"
+					:y "0%"
+					:anchor "left center"
+					:height "96%"
+					:width "47px")
+	:stacking "fg"
+	:exclusive true
+	:focusable false
+	(bar))

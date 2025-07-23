@@ -1,0 +1,23 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;  Hogyoku App Launcher Widget
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget launcher []
+  (box :class "launcher-container" :orientation "v" :space-evenly false
+    ;; Campo de búsqueda
+    (box :class "search-box" :space-evenly false
+      (label :class "search-icon" :text "")
+      (input :class "search-input"
+             :onchange "eww update app_search='{}'"
+             :onaccept "eww update launcher_reveal=false && nohup ${filtered_apps[0].exec} &"
+             ""))
+
+    ;; Lista de aplicaciones
+    (scroll :hscroll false :vscroll true :class "app-list-scroll"
+      (box :class "app-list" :orientation "v" :space-evenly false
+        (for app in filtered_apps
+          (button :class "app-item" 
+                  :onclick "eww update launcher_reveal=false && nohup ${app.exec} &"
+            (box :space-evenly false
+              (image :path "${app.icon}" :class "app-icon" :image-width 32 :image-height 32)
+              (label :text "${app.name}" :class "app-name" :xalign 0))))))))

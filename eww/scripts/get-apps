@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Directorios donde buscar archivos .desktop
+APP_DIRS=("/usr/share/applications" "/usr/local/share/applications" "$HOME/.local/share/applications")
+
+# Argumento de búsqueda (opcional)
+SEARCH_TERM="${1:-}"
+
+# Función para parsear un archivo .desktop
+parse_desktop_file() {
+    local file=$1
+    local name=""
+    local icon=""
+    local exec=""
+    local no_display=""
+
+    # Extraer información del archivo
+    name=$(grep -m 1 "^Name=" "$file" | cut -d'=' -f2-)
+    icon=$(grep -m 1 "^Icon=" "$file" | cut -d'=' -f2-)
+    exec=$(grep -m 1 "^Exec=" "$file" | cut -d'=' -f2- | sed 's/ %[UuFfKk]//g') # Limpiar códigos de exec
+    no_display=$(grep -m 1 "^NoDisplay=" "$file" | cut -d'=' -f2-)
+
+    # Omitir si no tiene nombre, comando, o si es una entrada oculta
+    if [ -z "$name" ] || [ -z "$exec" ] || [ "$no_display" = "true" ]; then
+        return
+    fi
+    
+    # Omitir si el nombre ya ha sido procesado (evita duplicados)
+    if [[ ${processed_apps["$name"]} ]]; then
+        return
+    fi
+
+    # Filtrar por término de búsqueda si se proporcionó
+    if [ -n "$SEARCH_TERM" ] && ! echo "$name" | grep -qi "$SEARCH_TERM"; then
+        return
+    fi
+
+    # Usar un icono por defecto si no se especifica
+    if [ -z "$icon" ]; then
+        icon="application-x-executable"
+    fi
+
+    # Generar la entrada JSON
+    jq -n --arg name "$name" --arg icon "$icon" --arg exec "$exec" \
+        '{name: $name, icon: $icon, exec: $exec}'
+        
+    processed_apps["$name"]=1
+}
+
+# Inicio del script
+echo "["
+
+# Usar un array asociativo para evitar duplicados
+declare -A processed_apps
+
+first=true
+for dir in "${APP_DIRS[@]}"; do
+    if [ -d "$dir" ]; then
+        for file in "$dir"/*.desktop; do
+            if [ -f "$file" ]; then
+                output=$(parse_desktop_file "$file")
+                if [ -n "$output" ]; then
+                    if [ "$first" = "true" ]; then
+                        first=false
+                    else
+                        echo ","
+                    fi
+                    echo "$output"
+                    processed_apps["$(echo "$output" | jq -r .name)"]=1
+                fi
+            fi
+        done
+    fi
+done
+
+echo "]"

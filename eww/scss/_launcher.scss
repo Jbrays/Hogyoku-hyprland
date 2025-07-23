@@ -1,0 +1,58 @@
+/* Launcher Styles */
+
+.launcher-container {
+  background-color: $background;
+  border-radius: 12px;
+  border: 1px solid $primary;
+  padding: 10px;
+}
+
+.search-box {
+  background-color: $primary;
+  border-radius: 8px;
+  padding: 4px 12px;
+  margin-bottom: 10px;
+}
+
+.search-icon {
+  font-size: 1.2rem;
+  color: $primary;
+  margin-right: 10px;
+}
+
+.search-input {
+  all: unset;
+  background-color: transparent;
+  color: $primary;
+  font-size: 1.1rem;
+}
+
+.app-list-scroll {
+  min-height: 300px;
+}
+
+.app-list {
+  padding-right: 5px;
+}
+
+.app-item {
+  all: unset;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $primary;
+  }
+}
+
+.app-icon {
+  margin-right: 12px;
+  font-size: 2rem; // Fallback size
+}
+
+.app-name {
+  font-size: 1rem;
+  color: $primary;
+}

@@ -1,0 +1,28 @@
+;; Variables
+(defpoll clock_hour :interval "1s" "date +'%H'")
+(defpoll clock_min :interval "1s" "date +'%M'")
+(defpoll clock_date :interval "1h" "date +'%A, %d %B'")
+(defpoll theme_mode :interval "1s" "cat ~/Hogyoku/cache/theme.state || echo 'dark'")
+
+;; Workspaces
+(defpoll workspaces :interval "120ms" "scripts/WorkSpaces")
+
+;; Reveal Vars
+(defvar pac false)
+(defvar power false)
+(defpoll mic_muted :interval "1s" "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q 'yes' && echo 'true' || echo 'false'")
+(defpoll eww_background :interval "10s" "jq -r '.background' ~/Hogyoku/cache/colors.json")
+(defpoll speaker_muted :interval "1s" "pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 'true' || echo 'false'")
+
+;; OSD Widgets
+(defvar volume_level 0)
+(defvar volume_muted "false")
+
+;; Brightness OSD
+(defpoll brightness_level :interval "1s" `echo "scale=2; $(brightnessctl g) / $(brightnessctl m) * 100" | bc`)
+(defvar brightness_icon "󰃠")
+
+;; App Launcher
+(defvar launcher_reveal false)
+(defvar app_search "")
+(defpoll filtered_apps :interval "500ms" `scripts/get-apps '{app_search}'`)

@@ -1,0 +1,7 @@
+;; Clock Widgets ;;
+(defwidget clock []
+  (box :class "clock-wrapper bar-button" :halign "center"
+    (button :onclick "${EWW_CMD} open --toggle calendar_win"
+      (box :class "clock-container" :orientation "v" :space-evenly false :spacing 0
+        (label :class "clock-hour" :text clock_hour)
+        (label :class "clock-min" :text clock_min)))))

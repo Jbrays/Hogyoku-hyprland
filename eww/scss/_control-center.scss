@@ -1,0 +1,58 @@
+/* --- Control Center --- */
+.cc-box {
+  background-color: $background;
+  border-radius: 12px;
+  padding: 1rem;
+}
+.cc-row {
+  /* Contenedor para las filas de la rejilla */
+}
+.cc-section {
+  background-color: $surfaceContainer;
+  border-radius: 24px;
+  padding: 1rem;
+  min-height: 50px;
+}
+.cc-group {
+  background-color: $error; /* Usando un color de la paleta */
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 50px;
+}
+.cc-group-title {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: $onError;
+  margin-bottom: 0.5rem;
+}
+.cc-button {
+  background-color: $secondaryContainer; /* primaryContainer */
+  color: $primary; /* onPrimaryContainer */
+  border-radius: 8px;
+  padding: 0.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.cc-button:hover {
+  background-color: $foreground;
+}
+
+.toggle-btn {
+  font-size: 34px;
+  min-width: 76px;
+  min-height: 76px;
+  border-radius: 50%;
+  background-color: $background;
+  color: $foreground;
+  transition: all 0.3s ease;
+}
+.toggle-btn:hover {
+  background-color: $primary;
+}
+.toggle-btn.muted {
+  background-color: $error;
+  color: $background;
+}
+.toggle-btn.muted:hover {
+  background-color: $primary;
+}

@@ -1,0 +1,11 @@
+(defwindow control_center_win
+  :monitor 0
+  :geometry (geometry :x "15px"
+                      :y "0px"
+                      :width "660px"
+                      :height "96%"
+                      :anchor "left center"
+                      :corner-radius 32)
+  :stacking "fg"
+  :focusable "false"
+  (control-center-widget))
