@@ -1,0 +1,13 @@
+/* --- Global Reset & Base --- */
+* {
+  all: unset;
+}
+
+@import "/home/jeff/Hogyoku/cache/_variables.scss";
+
+// --- Estilo de la Barra ---
+.bar {
+  background-color: $background;
+  border-radius: 12px;
+  padding: 0.3rem;
+}

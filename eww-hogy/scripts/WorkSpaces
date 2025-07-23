@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Script para obtener y formatear workspaces de Hyprland para eww (versión para polling)
+HYPRCTL="/usr/bin/hyprctl"
+JQ="/usr/bin/jq"
+
+output=$($HYPRCTL -j workspaces | $JQ -c 'sort_by(.id)')
+active_id=$($HYPRCTL -j activeworkspace | $JQ -r '.id')
+
+if [ -n "$output" ] && [ -n "$active_id" ]; then
+    echo "$output" | $JQ --argjson active_id "$active_id" -c 'map({
+        "id": .id,
+        "windows": .windows,
+        "active": (.id == $active_id)
+    })'
+else
+    # Si hyprctl falla, devuelve un array JSON vacío para evitar errores en eww
+    echo "[]"
+fi

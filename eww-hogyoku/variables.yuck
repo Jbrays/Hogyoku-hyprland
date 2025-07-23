@@ -1,0 +1,11 @@
+;; Variables
+(defpoll clock_hour :interval "1s" "date +'%H'")
+(defpoll clock_min :interval "1s" "date +'%M'")
+(defpoll clock_date :interval "1h" "date +'%A, %d %B'")
+(defpoll theme_mode :interval "1s" "cat ~/.cache/mugetsu/theme.state || echo 'dark'")
+(defpoll workspaces :interval "150ms" "/home/jeff/Mugetsu/eww-z0mbi3/scripts/WorkSpaces")
+(defvar notify false)
+(defvar pac false)
+(defvar bat false)
+(defvar volum false)
+(defvar power false)

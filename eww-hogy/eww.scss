@@ -1,0 +1,9 @@
+// 1. Importar colores generados dinámicamente (este no se mueve)
+@import "/home/jeff/Hogyoku/cache/_variables.scss";
+
+// 2. Importar parciales con la estructura del tema
+@import "scss/base";
+@import "scss/bar";
+@import "scss/calendar";
+@import "scss/control-center";
+@import "scss/osd";
