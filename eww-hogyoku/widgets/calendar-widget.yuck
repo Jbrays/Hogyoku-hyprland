@@ -1,6 +1,0 @@
-(defwidget calendar-widget []
-  (box :class "calendar-box" :orientation "v"
-    (box :class "time-and-date" :orientation "v"
-      (label :class "time-big" :text "${clock_hour}:${clock_min}")
-      (label :class "date-big" :text clock_date))
-    (calendar :class "cal")))

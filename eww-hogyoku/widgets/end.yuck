@@ -1,5 +1,0 @@
-(defwidget end []
-  (box :orientation "v" :space-evenly false :valign "end"
-    (bottom)
-  )
-)

@@ -1,7 +1,0 @@
-(defwidget bar []
-	(box :class "bar" 
-		 :orientation "v" 
-		 :vexpand "false" 
-		 :hexpand "false"
-
-(end)))

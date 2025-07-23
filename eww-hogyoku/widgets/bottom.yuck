@@ -1,7 +1,0 @@
-(defwidget bottom []
-  (box :orientation "v" :space-evenly false :spacing 4
-    (clock)
-    (dashboard-button)
-    (power-button)
-  )
-)
