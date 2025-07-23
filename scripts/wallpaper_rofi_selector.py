@@ -16,23 +16,40 @@ THUMBNAIL_DIR = CACHE_DIR / "thumbnails"
 STATE_FILE = CACHE_DIR / "theme.state"
 THEMER_SCRIPT = HOGYOKU_DIR / "scripts" / "themer.py"
 
-THUMB_SIZE = (256, 256)
 
 
 def create_thumbnail(image_path: Path, thumbnail_path: Path):
     if thumbnail_path.exists(): return
     try:
         image = Image.open(image_path)
-        if image.mode != 'RGB': image = image.convert('RGB')
-        image.thumbnail(THUMB_SIZE, Image.Resampling.LANCZOS)
+        width, height = image.size
+        size = 256
+        if width <= size and height <= size:
+            image = image.resize((size, size), Image.Resampling.LANCZOS)
+            image.save(thumbnail_path, "PNG")
+            return
+        # Redimensionar manteniendo proporción, lado corto = size
+        if width > height:
+            new_height = size
+            new_width = int(width * size / height)
+        else:
+            new_width = size
+            new_height = int(height * size / width)
+        img = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+        # Recortar cuadrado centrado
+        left = (new_width - size) // 2
+        top = (new_height - size) // 2
+        right = left + size
+        bottom = top + size
+        img = img.crop((left, top, right, bottom))
         thumbnail_path.parent.mkdir(parents=True, exist_ok=True)
-        image.save(thumbnail_path, "PNG")
+        img.save(thumbnail_path, "PNG")
     except Exception as e:
         print(f"Error creando miniatura para {image_path}: {e}", file=sys.stderr)
 
 def generate_rofi_list() -> list[str]:
     THUMBNAIL_DIR.mkdir(parents=True, exist_ok=True)
-    image_paths = list(WALLPAPER_DIR.glob("*.jpg")) + list(WALLPAPER_DIR.glob("*.jpeg")) + list(WALLPAPER_DIR.glob("*.png"))
+    image_paths = list(WALLPAPER_DIR.glob("*.[jp][pn]g")) + list(WALLPAPER_DIR.glob("*.jpeg"))
     thumbnail_paths = [THUMBNAIL_DIR / f"{p.stem}.png" for p in image_paths]
     with mp.Pool(processes=mp.cpu_count()) as pool:
         pool.starmap(create_thumbnail, zip(image_paths, thumbnail_paths))
@@ -78,10 +95,8 @@ def main():
         subprocess.run(["swww", "img", str(wallpaper_path), "--transition-type", "any"], check=True)
         subprocess.run(["python3", str(THEMER_SCRIPT), "--wallpaper", str(wallpaper_path), "--mode", current_mode], check=True)
         print("¡Entorno actualizado con éxito!")
-        # Recargar Eww Hogyoku
-        #subprocess.run(["eww", "-c", str(HOGYOKU_DIR / "eww-hogyoku"), "reload"])
         # Recargar Eww-hogy
-        subprocess.run(["eww", "-c", str(HOGYOKU_DIR / "eww-hogy"), "reload"])
+        subprocess.run(["eww", "-c", str(HOGYOKU_DIR / "eww"), "reload"])
     except Exception as e:
         print(f"Un error inesperado ocurrió: {e}", file=sys.stderr)
 

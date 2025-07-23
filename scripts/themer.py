@@ -167,11 +167,12 @@ def generate_hyprland_colors(palette):
             template_content = f.read()
         
         # Reemplazar los marcadores de posición con los colores de la paleta
-        # Convertimos los colores HEX a un formato que Hyprland entienda (sin #)
         processed_content = template_content
         for name, hex_color in palette.items():
-            hypr_color = hex_color.lstrip('#')
-            processed_content = processed_content.replace(f"${name}", hypr_color)
+            # Eliminar el '#' si existe y envolver con 'rgb()'
+            clean_hex = hex_color.lstrip('#')
+            hyprland_color = f"rgb({clean_hex})"
+            processed_content = processed_content.replace(f"${name}", hyprland_color)
             
         with open(output_path, 'w') as f:
             f.write(processed_content)
@@ -182,6 +183,30 @@ def generate_hyprland_colors(palette):
         print(f"Error: No se encontró la plantilla en '{template_path}'")
     except Exception as e:
         print(f"Error al generar la configuración de Hyprland: {e}")
+
+def generate_rofi_colors(palette):
+    """Genera el archivo de colores de Rofi a partir de una plantilla."""
+    template_path = os.path.join(TEMPLATES_DIR, "rofi-colors.rasi.tpl")
+    output_path = os.path.join(CACHE_DIR, "rofi-colors.rasi")
+    print(f"Generando tema de Rofi en: {output_path}")
+    try:
+        with open(template_path, 'r') as f:
+            template_content = f.read()
+        replacements = {
+            "$main_bg": palette.get("surface", "#232323"),
+            "$main_fg": palette.get("onSurface", "#e0e0e0"),
+            "$select_bg": palette.get("primary", "#b3b3ff"),
+            "$select_fg": palette.get("onPrimary", "#232323"),
+        }
+        for key, value in replacements.items():
+            template_content = template_content.replace(key, value)
+        with open(output_path, 'w') as f:
+            f.write(template_content)
+        print("Tema de Rofi generado.")
+    except FileNotFoundError:
+        print(f"Error: No se encontró la plantilla en '{template_path}'")
+    except Exception as e:
+        print(f"Error al generar el tema de Rofi: {e}")
 
 def compile_scss(template_name, output_name):
     """Compila una plantilla SCSS a un archivo CSS."""
@@ -269,6 +294,7 @@ def main():
     generate_scss_variables(final_palette)
     generate_json_cache(final_palette)
     generate_hyprland_colors(final_palette)
+    generate_rofi_colors(final_palette)
     if not compile_scss("gtk3.scss", "gtk-3.0.css"): return
     if not compile_scss("gtk4.scss", "gtk-4.0.css"): return
     apply_gtk_theme(args.mode)

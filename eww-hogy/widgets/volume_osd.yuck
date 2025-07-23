@@ -1,6 +1,0 @@
-(defwidget volume_osd []
-  (box :class "osd-window" :orientation "v" :style "background-color: ${eww_background};"
-    (circular-progress :value {volume_muted == "true" ? 0 : volume_level}
-                       :class "osd-circular-progress"
-                       :thickness 10
-      (label :class "osd-icon-big" :text {volume_muted == "true" ? "󰝟" : ""}))))

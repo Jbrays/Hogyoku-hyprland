@@ -1,2 +1,0 @@
-(defwidget dashboard-button []
-  (button :class "dashboard-button bar-button" :onclick "${EWW_CMD} open --toggle control_center_win" "󰕮"))

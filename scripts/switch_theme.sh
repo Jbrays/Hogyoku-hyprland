@@ -31,7 +31,6 @@ fi
 python3 "$THEMER_SCRIPT" --wallpaper "$CURRENT_WALLPAPER" --mode "$NEW_MODE"
 
 # Recargar Eww
-eww -c "$HOME/Hogyoku/eww-hogyoku" reload
-eww -c "$HOME/Hogyoku/eww-hogy" reload
+eww -c "$HOME/Hogyoku/eww" reload
 
 echo "Tema cambiado a $NEW_MODE"

@@ -7,20 +7,20 @@ configuration {
 
 //----- Global Properties -----//
 
-@theme "matugen-rofi.rasi"
+@theme "/home/jeff/Hogyoku/cache/rofi-colors.rasi"
 
 //----- Main Window -----//
 
 window {
     enabled:                     true;
     fullscreen:                  false;
-    width:                       90%;
+    width:                       96%;
     transparency:                "real";
     cursor:                      "default";
     spacing:                     0px;
     padding:                     0px;
     border:                      0px;
-    border-radius:               30px;
+    border-radius:               25px;
     border-color:                transparent;
     background-color:            transparent;
 }
@@ -64,6 +64,7 @@ element {
     cursor:                      default;
     background-color:            transparent;
     text-color:                  @main-fg;
+    children:                    [ "element-icon" ];
 }
 
 @media(max-aspect-ratio: 1.8) {
@@ -78,18 +79,23 @@ element selected.normal {
 }
 
 element-icon {
-    size:                        30%;
+    size:                        26%;
     cursor:                      pointer;
     border-radius:               15px;
     background-color:            transparent;
     text-color:                  inherit;
 }
 
+/*
 element-text {
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-    padding:                     20px;
-    cursor:                      inherit;
-    background-color:            transparent;
-    text-color:                  @main-fg; /* FORZADO: Asegura que el texto siempre sea visible */
+    display: none;
+    min-width: 0px;
+    min-height: 0px;
+    width: 0px;
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+    text-color: transparent;
 }
+*/

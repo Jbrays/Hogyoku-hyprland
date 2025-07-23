@@ -2,8 +2,8 @@
 
 general {
     # Color del borde de la ventana activa
-    col.active_border = rgba($primary)
+    col.active_border = $primary
 
     # Color del borde de la ventana inactiva
-    col.inactive_border = rgba($surface)
+    col.inactive_border = $surface
 }

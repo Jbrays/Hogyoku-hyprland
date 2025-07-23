@@ -1,7 +1,0 @@
-;; End Widgets ;;
-(defwidget end []
-	(box :orientation "v" 
-		 :space-evenly "false" 
-		 :valign "end" 
-		 :spacing 5
-(bottom)))
