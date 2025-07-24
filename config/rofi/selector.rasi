@@ -30,7 +30,7 @@ window {
 mainbox {
     enabled:                     true;
     children:                    [ "listview" ];
-    background-color:            @main-bg;
+    background-color:            @background;
 }
 
 //----- Listview -----//
@@ -50,7 +50,7 @@ listview {
     fixed-columns:               true;
     cursor:                      "default";
     background-color:            transparent;
-    text-color:                  @main-fg;
+    text-color:                  @foreground;
 }
 
 //----- Elements -----//
@@ -63,7 +63,7 @@ element {
     border-radius:               20px;
     cursor:                      default;
     background-color:            transparent;
-    text-color:                  @main-fg;
+    text-color:                  @foreground;
     children:                    [ "element-icon" ];
 }
 
@@ -74,8 +74,8 @@ element {
 }
 
 element selected.normal {
-    background-color:            @select-bg;
-    text-color:                  @select-fg;
+    background-color:            @primary;
+    text-color:                  @active;
 }
 
 element-icon {

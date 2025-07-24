@@ -1,0 +1,187 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               " Applications";
+	drun-display-format:        "{name}";
+}
+
+/*****----- Global Properties -----*****/
+@import                          "../../cache/rofi-colors.rasi"
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       600px; // 40% más pequeño que 1000px
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               20px;
+    border-color:                @primary;
+    background-color:            @background;
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     12px; // 40% menos
+    margin:                      24px; // 40% menos
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px 0px 0px 0px;
+    border-color:                @primary;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               100%;
+    border-color:                @primary;
+    background-color:            @background;
+    text-color:                  @onPrimaryContainer;
+    children:                    [ "prompt", "textbox-prompt-colon", "entry" ];
+}
+
+prompt {
+    enabled:                     false;
+    padding:                     15px;
+    border-radius:               100%;
+    background-color:            @primary;
+    text-color:                  @background;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "::";
+    padding:                     15px;
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+entry {
+    enabled:                     true;
+    padding:                     15px 0px;
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     5;
+    lines:                       3;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     20px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @onPrimaryContainer;
+    cursor:                      "default";
+}
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                @selected;
+    border-radius:               0px;
+    background-color:            @background;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     12px; // 40% menos
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @primary;
+    background-color:            transparent;
+    text-color:                  @onPrimaryContainer;
+    orientation:                 vertical;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @onPrimaryContainer;
+}
+element selected.normal {
+    background-color:            @background;
+    text-color:                  @primary;
+    border-radius:               0px;
+}
+element-icon {
+    padding:                     18px; // 40% menos
+    border-radius:               12px; // 40% menos
+    background-color:            @surfaceContainer;
+    text-color:                  inherit;
+    size:                        38px; // 40% menos
+    cursor:                      inherit;
+}
+element-icon selected.normal {
+    background-color:            @primary;
+}
+element-text {
+    padding:                     6px; // 40% menos
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+element-text selected {
+    border-radius:               100%;
+    background-color:            @background;
+    text-color:                  @primary;
+}
+
+/*****----- Message -----*****/
+error-message {
+    padding:                     20px;
+    border:                      2px solid;
+    border-radius:               20px;
+    border-color:                @selected;
+    background-color:            @background;
+    text-color:                  @onPrimaryContainer;
+}
+textbox {
+    background-color:            @background;
+    text-color:                  @onPrimaryContainer;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    highlight:                   none;
+}

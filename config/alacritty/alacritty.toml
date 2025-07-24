@@ -1,0 +1,30 @@
+[general]
+import = [
+  "/home/jeff/Hogyoku/cache/alacritty-colors.toml"
+]
+
+[font]
+size = 12
+
+[font.normal]
+family = "JetBrainsMono"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono"
+style = "Italic"
+
+[window]
+decorations = "none"
+
+[window.dimensions]
+columns = 100
+lines = 24
+
+[window.padding]
+x = 20
+y = 20

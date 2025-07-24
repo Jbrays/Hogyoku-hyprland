@@ -21,8 +21,3 @@
 ;; Brightness OSD
 (defpoll brightness_level :interval "1s" `echo "scale=2; $(brightnessctl g) / $(brightnessctl m) * 100" | bc`)
 (defvar brightness_icon "󰃠")
-
-;; App Launcher
-(defvar launcher_reveal false)
-(defvar app_search "")
-(defpoll filtered_apps :interval "500ms" `scripts/get-apps '{app_search}'`)
