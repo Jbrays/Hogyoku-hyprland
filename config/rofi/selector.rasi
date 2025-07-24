@@ -7,7 +7,7 @@ configuration {
 
 //----- Global Properties -----//
 
-@theme "/home/jeff/Hogyoku/cache/rofi-colors.rasi"
+@theme "~/Hogyoku/cache/rofi-colors.rasi"
 
 //----- Main Window -----//
 

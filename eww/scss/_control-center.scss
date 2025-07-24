@@ -1,11 +1,12 @@
 /* --- Control Center --- */
 .cc-box {
   background-color: $background;
-  border-radius: 12px;
+  border-radius: 24px;
   padding: 1rem;
 }
 .cc-row {
   /* Contenedor para las filas de la rejilla */
+  border-radius: 12px;
 }
 .cc-section {
   background-color: $surfaceContainer;

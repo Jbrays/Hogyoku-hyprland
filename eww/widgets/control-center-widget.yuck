@@ -21,7 +21,7 @@
                       {mic_muted == "true" ? "" : ""})
               (button :class "toggle-btn" "󰀝")
               (button :class "toggle-btn"
-                :onclick "sh /home/jeff/Mugetsu/scripts/switch_theme.sh toggle"
+                :onclick "sh ~/Hogyoku/scripts/switch_theme.sh toggle"
                 (label :class "toggle-switch-icon"
                   :text {theme_mode == "dark" ? "󰖨" : ""}))
             )

@@ -1,6 +1,6 @@
 [general]
 import = [
-  "/home/jeff/Hogyoku/cache/alacritty-colors.toml"
+  "~/Hogyoku/cache/alacritty-colors.toml"
 ]
 
 [font]

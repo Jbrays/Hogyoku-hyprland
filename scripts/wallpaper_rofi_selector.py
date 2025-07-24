@@ -84,7 +84,7 @@ def main():
 
     # Guardar el wallpaper seleccionado para uso futuro (ej. cambio de tema)
     with open(CACHE_DIR / "current_wallpaper", "w") as f:
-        f.write(str(wallpaper_path))
+        f.write(str(wallpaper_path).replace(str(HOME), "~"))
 
     # --- Lógica de Theming ---
     try:
