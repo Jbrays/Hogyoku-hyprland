@@ -185,26 +185,17 @@ def generate_hyprland_colors(palette):
         print(f"Error al generar la configuración de Hyprland: {e}")
 
 def generate_rofi_colors(palette):
-    """Genera el archivo de colores de Rofi a partir de una plantilla."""
-    template_path = os.path.join(TEMPLATES_DIR, "rofi-colors.rasi.tpl")
+    """Genera el archivo de colores de Rofi solo con las variables que existen en la paleta."""
     output_path = os.path.join(CACHE_DIR, "rofi-colors.rasi")
     print(f"Generando tema de Rofi en: {output_path}")
     try:
-        with open(template_path, 'r') as f:
-            template_content = f.read()
-        replacements = {
-            "$main_bg": palette.get("surface", "#232323"),
-            "$main_fg": palette.get("onSurface", "#e0e0e0"),
-            "$select_bg": palette.get("primary", "#b3b3ff"),
-            "$select_fg": palette.get("onPrimary", "#232323"),
-        }
-        for key, value in replacements.items():
-            template_content = template_content.replace(key, value)
+        lines = ["* {"]
+        for name, hex_color in palette.items():
+            lines.append(f"    {name}:        {hex_color};")
+        lines.append("}")
         with open(output_path, 'w') as f:
-            f.write(template_content)
-        print("Tema de Rofi generado.")
-    except FileNotFoundError:
-        print(f"Error: No se encontró la plantilla en '{template_path}'")
+            f.write("\n".join(lines))
+        print("Tema de Rofi generado solo con variables existentes en la paleta.")
     except Exception as e:
         print(f"Error al generar el tema de Rofi: {e}")
 
@@ -257,6 +248,146 @@ def copy_css_to_config():
         subprocess.run(["cp", src_path, dest_path])
     print("Archivos CSS copiados a las carpetas de configuración.")
 
+def generate_kitty_colors(palette):
+    """Genera el archivo de colores de Kitty a partir del template y la paleta generada."""
+    template_path = os.path.join(TEMPLATES_DIR, "kitty-colors.conf.tpl")
+    output_path = os.path.join(CACHE_DIR, "kitty-colors.conf")
+
+    # Mapeo estándar de Material You a los 16 colores base de terminal
+    # Si la paleta no tiene alguno, se usa un fallback razonable
+    color_map = {
+        'color0': palette.get('surfaceContainerLowest', palette.get('background', '#181c20')),
+        'color1': palette.get('error', '#ff5370'),
+        'color2': palette.get('primary', '#c3e88d'),
+        'color3': palette.get('secondaryContainer', '#ffcb6b'),
+        'color4': palette.get('onPrimary', '#82aaff'),
+        'color5': palette.get('onPrimaryContainer', '#c792ea'),
+        'color6': palette.get('outline', '#89ddff'),
+        'color7': palette.get('onSurface', '#d0d0d0'),
+        'color8': palette.get('surfaceContainer', palette.get('background', '#282c34')),
+        'color9': palette.get('onError', '#ff5370'),
+        'color10': palette.get('primaryContainer', '#c3e88d'),
+        'color11': palette.get('onSecondaryContainer', '#ffcb6b'),
+        'color12': palette.get('onPrimary', '#82aaff'),
+        'color13': palette.get('primary', '#c792ea'),
+        'color14': palette.get('onSurfaceVariant', '#89ddff'),
+        'color15': palette.get('onBackground', '#ffffff'),
+        'foreground': palette.get('foreground', palette.get('onBackground', '#e0e2e8')),
+        'background': palette.get('background', '#181c20'),
+        'selection_foreground': palette.get('onPrimary', palette.get('foreground', '#e0e2e8')),
+        'selection_background': palette.get('primary', palette.get('background', '#9acbfa')),
+        'url_color': palette.get('primary', '#9acbfa'),
+    }
+
+    try:
+        with open(template_path, 'r') as f:
+            template = f.read()
+        for key, value in color_map.items():
+            template = template.replace(f'{{{key}}}', value)
+        # Elimina cualquier variable no existente
+        import re
+        template = re.sub(r'\{\w+\}', '', template)
+        with open(output_path, 'w') as f:
+            f.write(template)
+        print(f"Colores de Kitty generados en: {output_path}")
+    except Exception as e:
+        print(f"Error al generar los colores de Kitty: {e}")
+
+def generate_alacritty_colors(palette):
+    """Genera el archivo de colores de Alacritty a partir del template y la paleta generada."""
+    template_path = os.path.join(TEMPLATES_DIR, "alacritty-colors.yml.tpl")
+    output_path = os.path.join(CACHE_DIR, "alacritty-colors.yml")
+
+    color_map = {
+        'color0': palette.get('surfaceContainerLowest', palette.get('background', '#181c20')),
+        'color1': palette.get('error', '#ff5370'),
+        'color2': palette.get('primary', '#c3e88d'),
+        'color3': palette.get('secondaryContainer', '#ffcb6b'),
+        'color4': palette.get('onPrimary', '#82aaff'),
+        'color5': palette.get('onPrimaryContainer', '#c792ea'),
+        'color6': palette.get('outline', '#89ddff'),
+        'color7': palette.get('onSurface', '#d0d0d0'),
+        'color8': palette.get('surfaceContainer', palette.get('background', '#282c34')),
+        'color9': palette.get('onError', '#ff5370'),
+        'color10': palette.get('primaryContainer', '#c3e88d'),
+        'color11': palette.get('onSecondaryContainer', '#ffcb6b'),
+        'color12': palette.get('onPrimary', '#82aaff'),
+        'color13': palette.get('primary', '#c792ea'),
+        'color14': palette.get('onSurfaceVariant', '#89ddff'),
+        'color15': palette.get('onBackground', '#ffffff'),
+        'foreground': palette.get('foreground', palette.get('onBackground', '#e0e2e8')),
+        'background': palette.get('background', '#181c20'),
+        'selection_foreground': palette.get('onPrimary', palette.get('foreground', '#e0e2e8')),
+        'selection_background': palette.get('primary', palette.get('background', '#9acbfa')),
+        'url_color': palette.get('primary', '#9acbfa'),
+    }
+
+    try:
+        with open(template_path, 'r') as f:
+            template = f.read()
+        for key, value in color_map.items():
+            template = template.replace(f'{{{key}}}', value)
+        import re
+        template = re.sub(r'\{\w+\}', '', template)
+        with open(output_path, 'w') as f:
+            f.write(template)
+        print(f"Colores de Alacritty generados en: {output_path}")
+    except Exception as e:
+        print(f"Error al generar los colores de Alacritty: {e}")
+
+def generate_alacritty_colors_toml(palette):
+    """Genera el archivo de colores de Alacritty en formato TOML, con campos extra para contraste y visibilidad."""
+    template_path = os.path.join(TEMPLATES_DIR, "alacritty-colors.toml.tpl")
+    output_path = os.path.join(CACHE_DIR, "alacritty-colors.toml")
+
+    # Mapeo extendido para campos extra
+    color_map = {
+        'color0': palette.get('onSurfaceVariant', '#d0d0d0'),
+        'color1': palette.get('error', '#ff5370'),
+        'color2': palette.get('primary', '#c3e88d'),
+        'color3': palette.get('secondaryContainer', '#ffcb6b'),
+        'color4': palette.get('primary', '#82aaff'),
+        'color5': palette.get('onPrimaryContainer', '#c792ea'),
+        'color6': palette.get('outline', '#89ddff'),
+        'color7': palette.get('onSurface', '#d0d0d0'),
+        'color8': palette.get('outline', '#89ddff'),
+        'color9': palette.get('onError', '#ff5370'),
+        'color10': palette.get('primaryContainer', '#c3e88d'),
+        'color11': palette.get('onSecondaryContainer', '#ffcb6b'),
+        'color12': palette.get('onPrimary', '#82aaff'),
+        'color13': palette.get('primary', '#c792ea'),
+        'color14': palette.get('onSurfaceVariant', '#89ddff'),
+        'color15': palette.get('onBackground', '#ffffff'),
+        'foreground': palette.get('foreground', palette.get('onBackground', '#e0e2e8')),
+        'background': palette.get('background', '#181c20'),
+        'selection_foreground': palette.get('onPrimary', palette.get('foreground', '#e0e2e8')),
+        'selection_background': palette.get('primary', palette.get('background', '#9acbfa')),
+        # Colores extra para contraste y visibilidad
+        'cursor': palette.get('onBackground', '#ffffff'),
+        'cursor_text': palette.get('background', '#181c20'),
+        'search_focused_bg': palette.get('primary', '#9acbfa'),
+        'search_focused_fg': palette.get('background', '#181c20'),
+        'search_bg': palette.get('surfaceContainerHigh', '#313539'),
+        'search_fg': palette.get('onSurface', '#e0e2e8'),
+        'hint_start_bg': palette.get('primaryContainer', '#0b4a72'),
+        'hint_start_fg': palette.get('onPrimaryContainer', '#cde5ff'),
+        'hint_end_bg': palette.get('secondaryContainer', '#3a4857'),
+        'hint_end_fg': palette.get('onSecondaryContainer', '#d4e4f6'),
+    }
+
+    try:
+        with open(template_path, 'r') as f:
+            template = f.read()
+        for key, value in color_map.items():
+            template = template.replace(f'{{{key}}}', value)
+        import re
+        template = re.sub(r'\{\w+\}', '', template)
+        with open(output_path, 'w') as f:
+            f.write(template)
+        print(f"Colores de Alacritty (TOML) generados en: {output_path}")
+    except Exception as e:
+        print(f"Error al generar los colores de Alacritty (TOML): {e}")
+
 def main():
     parser = argparse.ArgumentParser(description="Generador de temas dinámicos para Hogyoku.")
     parser.add_argument('--wallpaper', type=str, help="Ruta a la imagen del fondo de pantalla.")
@@ -295,10 +426,31 @@ def main():
     generate_json_cache(final_palette)
     generate_hyprland_colors(final_palette)
     generate_rofi_colors(final_palette)
+    generate_kitty_colors(final_palette)
+    generate_alacritty_colors(final_palette)
+    generate_alacritty_colors_toml(final_palette)
     if not compile_scss("gtk3.scss", "gtk-3.0.css"): return
     if not compile_scss("gtk4.scss", "gtk-4.0.css"): return
     apply_gtk_theme(args.mode)
     copy_css_to_config()
+
+    # Copiar los archivos generados a las carpetas config/kitty y config/alacritty de Hogyoku
+    import shutil
+    kitty_src = os.path.join(CACHE_DIR, "kitty-colors.conf")
+    kitty_dst = os.path.join(HOGYOKU_DIR, "config/kitty/kitty-colors.conf")
+    alacritty_src = os.path.join(CACHE_DIR, "alacritty-colors.yml")
+    alacritty_dst = os.path.join(HOGYOKU_DIR, "config/alacritty/alacritty-colors.yml")
+    try:
+        shutil.copy2(kitty_src, kitty_dst)
+        print(f"Colores de Kitty copiados a: {kitty_dst}")
+    except Exception as e:
+        print(f"Error copiando colores de Kitty: {e}")
+    try:
+        shutil.copy2(alacritty_src, alacritty_dst)
+        print(f"Colores de Alacritty copiados a: {alacritty_dst}")
+    except Exception as e:
+        print(f"Error copiando colores de Alacritty: {e}")
+
     print("--- Proceso de Theming de Hogyoku Finalizado ---")
 
 if __name__ == "__main__":
