@@ -8,4 +8,5 @@
                       :corner-radius 32)
   :stacking "fg"
   :focusable "false"
-  (control-center-widget))
+  (box :class "theme-${theme_mode}"
+    (control-center-widget)))

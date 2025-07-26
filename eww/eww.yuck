@@ -28,3 +28,4 @@
 (include "./windows/volume_osd.yuck")
 (include "./windows/mic_osd.yuck")
 (include "./windows/brightness_osd.yuck")
+(include "./widgets/music_player.yuck")

@@ -3,27 +3,26 @@
   (scroll :vexpand true :hexpand true
     (box :class "cc-box" :orientation "v" :spacing 10 :vexpand true :hexpand true
       (box :class "cc-row" :orientation "h" :spacing 10 :vexpand false :hexpand true
-        (box :class "cc-section" :hexpand true :vexpand true (label :text "github"))
+        (box :class "cc-section" :hexpand true :vexpand true (music-player))
         (box :class "cc-section" :hexpand true :vexpand true (label :text "música")))
       (box :class "cc-row" :orientation "h" :spacing 10 :vexpand false :hexpand true
         (box :class "cc-section" :hexpand true :vexpand true (label :text "controles"))
         (box :class "cc-section" :hexpand true :vexpand true
           (box :orientation "v" :spacing 16 :halign "center" :valign "center" :vexpand true :hexpand true
             (box :orientation "h" :spacing 16 :halign "center" :hexpand true
-              (button :class "toggle-btn" "")
-              (button :class "toggle-btn" "󰂯")
+              (button :class "toggle-btn wifi-${wifi_status}" :onclick "$HOME/Hogyoku/scripts/eww/launch_and_close.sh iwgtk" "")
+              (button :class "toggle-btn bluetooth-${bluetooth_status}" :onclick "$HOME/Hogyoku/scripts/eww/launch_and_close.sh blueberry" "󰂯")
               (button :class "toggle-btn ${speaker_muted == "true" ? "muted" : ""}" 
                       :onclick "pactl set-sink-mute @DEFAULT_SINK@ toggle"
                       {speaker_muted == "true" ? "󰝟" : ""}))
             (box :orientation "h" :spacing 16 :halign "center" :hexpand true
-              (button :class "toggle-btn ${mic_muted == "true" ? "muted" : ""}" 
-                      :onclick "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
-                      {mic_muted == "true" ? "" : ""})
+              (button :class "toggle-btn" 
+                      :onclick "hyprctl reload"
+                      "")
               (button :class "toggle-btn" "󰀝")
-              (button :class "toggle-btn"
-                :onclick "sh ~/Hogyoku/scripts/switch_theme.sh toggle"
-                (label :class "toggle-switch-icon"
-                  :text {theme_mode == "dark" ? "󰖨" : ""}))
+              (button :class "toggle-btn ${theme_mode == "dark" ? "active" : ""}"
+                      :onclick "sh $HOME/Hogyoku/scripts/theming/switch_theme.sh toggle"
+                      "")
             )
           )
         )

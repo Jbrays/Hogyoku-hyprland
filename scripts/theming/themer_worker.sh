@@ -8,7 +8,7 @@ exec &> >(tee -a "$LOG_FILE")
 # --- LÓGICA DE THEMING (movida desde switch_theme.sh) ---
 
 STATE_FILE="$HOME/Hogyoku/cache/theme.state"
-THEMER_SCRIPT="$HOME/Hogyoku/scripts/themer.py"
+THEMER_SCRIPT="$HOME/Hogyoku/scripts/theming/themer.py"
 WALLPAPER_FILE="$HOME/Hogyoku/cache/current_wallpaper"
 
 CURRENT_MODE=$(cat "$STATE_FILE" 2>/dev/null || echo "dark")

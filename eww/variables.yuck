@@ -13,6 +13,8 @@
 (defpoll mic_muted :interval "1s" "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q 'yes' && echo 'true' || echo 'false'")
 (defpoll eww_background :interval "10s" "jq -r '.background' ~/Hogyoku/cache/colors.json")
 (defpoll speaker_muted :interval "1s" "pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 'true' || echo 'false'")
+(defpoll wifi_status :interval "5s" "$HOME/Hogyoku/scripts/eww/wifi_status.sh")
+(defpoll bluetooth_status :interval "5s" "$HOME/Hogyoku/scripts/eww/bluetooth_status.sh")
 
 ;; OSD Widgets
 (defvar volume_level 0)
@@ -21,3 +23,12 @@
 ;; Brightness OSD
 (defpoll brightness_level :interval "1s" `echo "scale=2; $(brightnessctl g) / $(brightnessctl m) * 100" | bc`)
 (defvar brightness_icon "󰃠")
+
+;; --- Variables del Reproductor de Música ---
+(defpoll music_title :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh title")
+(defpoll music_artist :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh artist")
+(defpoll music_status_icon :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh player_status")
+(defpoll music_cover_path :interval "1s" "echo $HOME/.cache/eww/cover.png")
+(defpoll dynamic_gradient_style :interval "10s" "$HOME/Hogyoku/scripts/eww/music/generate_gradient.sh")
+
+

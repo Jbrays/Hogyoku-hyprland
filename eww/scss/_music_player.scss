@@ -1,0 +1,45 @@
+// SCSS for Music Player Widget
+
+.music-player-box {
+  border-radius: 18px;
+  border: 2px solid $error;
+}
+
+
+// La capa que contiene la imagen de fondo
+.music-cover-bg {
+  background-size: cover;
+  background-position: center;
+  border-radius: inherit; // Hereda el redondeo del padre
+}
+
+// La capa que contiene el contenido y el filtro
+.music-content-layer {
+  padding: 1rem;
+  // El fondo ahora se define dinámicamente en el archivo .yuck
+  border-radius: 16px; // Hereda el redondeo del padre
+}
+
+.music-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: $onSurface;
+}
+
+.music-artist {
+  font-size: 1rem;
+  color: $onSurfaceVariant;
+  margin-bottom: 1rem;
+}
+
+.music-controls {
+  .music-control-button {
+    font-family: "FiraCodeNerdFont";
+    font-size: 2.2rem;
+    color: $primary;
+    
+    &.play-pause {
+      margin: 0 1rem; // Espaciado entre botones
+    }
+  }
+}

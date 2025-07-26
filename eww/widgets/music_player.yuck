@@ -1,0 +1,38 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Music Player Widget (Adaptado para Hogyoku) - Diseño con Overlay
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defwidget music-player []
+  (overlay :class "music-player-box"
+    ;; Capa 1: La carátula de fondo
+    (box :class "music-cover-bg" 
+         :style "background-image: url('${music_cover_path}');")
+
+    ;; Capa 2: El contenido (con el filtro generado por el script)
+    (box :class "music-content-layer"
+         :orientation "v" 
+         :space-evenly false
+         :style "${dynamic_gradient_style}"
+      
+      ;; --- Información de la Canción (Arriba) ---
+      (box :class "music-info" 
+           :orientation "v" 
+           :space-evenly false 
+           :halign "start"
+           :valign "start"
+        (label :class "music-title" :halign "start" :limit-width 25 :text music_title)
+        (label :class "music-artist" :halign "start" :limit-width 30 :text music_artist))
+
+      ;; --- Espaciador ---
+      (box :vexpand true)
+
+      ;; --- Controles de Reproducción (Abajo) ---
+      (box :class "music-controls" 
+           :orientation "h" 
+           :space-evenly true 
+           :halign "center"
+           :valign "end"
+        (button :class "music-control-button" :onclick "playerctl previous" "󰒮")
+        (button :class "music-control-button play-pause" :onclick "playerctl play-pause" music_status_icon)
+        (button :class "music-control-button" :onclick "playerctl next" "󰒭")))))
+

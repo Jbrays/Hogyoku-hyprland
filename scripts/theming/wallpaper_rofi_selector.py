@@ -14,7 +14,7 @@ WALLPAPER_DIR = HOME / "Imágenes/wallpapers"
 CACHE_DIR = HOGYOKU_DIR / "cache"
 THUMBNAIL_DIR = CACHE_DIR / "thumbnails"
 STATE_FILE = CACHE_DIR / "theme.state"
-THEMER_SCRIPT = HOGYOKU_DIR / "scripts" / "themer.py"
+THEMER_SCRIPT = HOGYOKU_DIR / "scripts" / "theming" / "themer.py"
 
 
 
