@@ -3,5 +3,4 @@
 	(box	:orientation "v" 
 			:space-evenly "false" 
 			:valign "start" 
-(workspaces)
-(systray :class "tray" :icon-size 22 :spacing 10 :orientation "v")))
+(workspaces)))

@@ -1,51 +1,51 @@
 # Template de colores para Alacritty generado por Hogyoku (TOML)
 # Incluye colores extra para mejor contraste y visibilidad
 [colors.primary]
-background = "#191c1e"
-foreground = "#e1e3e4"
+background = "#1b1c1b"
+foreground = "#e4e2e1"
 
 [colors.selection]
-text = "#003543"
-background = "#8cd0ea"
+text = "#223430"
+background = "#b6cbc5"
 
 [colors.cursor]
-cursor = "#e1e3e4"
-text = "#191c1e"
+cursor = "#e4e2e1"
+text = "#1b1c1b"
 
 [colors.search.focused_match]
-background = "#8cd0ea"
-foreground = "#191c1e"
+background = "#b6cbc5"
+foreground = "#1b1c1b"
 
 [colors.search.matches]
-background = "#272a2c"
-foreground = "#e1e3e4"
+background = "#292a29"
+foreground = "#e4e2e1"
 
 [colors.hints.start]
-background = "#004e61"
-foreground = "#b7eaff"
+background = "#384a46"
+foreground = "#d2e7e0"
 
 [colors.hints.end]
-background = "#324a54"
-foreground = "#cde7f2"
+background = "#414846"
+foreground = "#dde4e1"
 
 [colors.normal]
-black   = "#bfc8cc"
+black   = "#c2c8c5"
 red     = "#ffb4ab"
-green   = "#8cd0ea"
-yellow  = "#324a54"
-blue    = "#8cd0ea"
-magenta = "#b7eaff"
-cyan    = "#899296"
-white   = "#e1e3e4"
+green   = "#b6cbc5"
+yellow  = "#414846"
+blue    = "#b6cbc5"
+magenta = "#d2e7e0"
+cyan    = "#8c928f"
+white   = "#e4e2e1"
 
 [colors.bright]
-black   = "#899296"
+black   = "#8c928f"
 red     = "#690005"
-green   = "#004e61"
-yellow  = "#cde7f2"
-blue    = "#003543"
-magenta = "#8cd0ea"
-cyan    = "#bfc8cc"
-white   = "#e1e3e4"
+green   = "#384a46"
+yellow  = "#dde4e1"
+blue    = "#223430"
+magenta = "#b6cbc5"
+cyan    = "#c2c8c5"
+white   = "#e4e2e1"
 
 # Puedes agregar más variables si la paleta lo requiere

@@ -1,0 +1,24 @@
+;; --- Widget de Bateria (Version con Icono y Popup en Hover) ---
+
+(defpoll battery_icon :interval "10s" :initial ""
+  `$HOME/Hogyoku/eww/scripts/get_battery_status.sh`)
+
+(defpoll battery_percentage :interval "10s" :initial 100
+  `$HOME/Hogyoku/eww/scripts/get_battery.sh | jq .percentage`)
+
+(defpoll battery_charging_status :interval "10s" :initial "Discharging"
+  `$HOME/Hogyoku/eww/scripts/get_battery.sh | jq -r .status`)
+
+(defwidget battery []
+  (eventbox
+    (box :class "bar-button icon-button battery-container" :halign "center" :valign "center" :orientation "v" :spacing -27
+      (label
+        :class "battery-text"
+        :text "${battery_percentage}%")
+      (label
+        :class "battery-icon ${battery_percentage <= 20 ? 'low' : ''} ${battery_charging_status == 'Charging' ? 'charging-icon-style' : ''}"
+        :text battery_icon)
+    )
+  )
+)
+

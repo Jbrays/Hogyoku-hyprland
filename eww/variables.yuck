@@ -8,6 +8,7 @@
 (defpoll workspaces :interval "120ms" "scripts/WorkSpaces")
 
 ;; Reveal Vars
+(defvar battery_popup_revealed false)
 (defvar pac false)
 (defvar power false)
 (defpoll mic_muted :interval "1s" "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q 'yes' && echo 'true' || echo 'false'")
@@ -30,5 +31,10 @@
 (defpoll music_status_icon :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh player_status")
 (defpoll music_cover_path :interval "1s" "echo $HOME/.cache/eww/cover.png")
 (defpoll dynamic_gradient_style :interval "10s" "$HOME/Hogyoku/scripts/eww/music/generate_gradient.sh")
+
+;; Variables del Calendario
+(defpoll calendar_day :interval "1h" "date '+%d'")
+(defpoll calendar_month :interval "1h" "date '+%m'")
+(defpoll calendar_year :interval "1h" "date '+%Y'")
 
 

@@ -1,15 +1,20 @@
-/* --- Control Center --- */
+/* ====================================
+   CONTROL CENTER LAYOUT
+   ==================================== */
+
+/* Main Container */
 .cc-box {
   background-color: $background;
   border-radius: 24px;
   padding: 1rem;
 }
 
+/* Grid Rows */
 .cc-row {
-  /* Contenedor para las filas de la rejilla */
   border-radius: 12px;
 }
 
+/* Content Sections */
 .cc-section {
   background-color: $surfaceContainer;
   border-radius: 24px;
@@ -17,9 +22,9 @@
   min-height: 50px;
 }
 
+/* Error Groups */
 .cc-group {
   background-color: $error;
-  /* Usando un color de la paleta */
   border-radius: 8px;
   padding: 1rem;
   min-height: 50px;
@@ -32,93 +37,139 @@
   margin-bottom: 0.5rem;
 }
 
+
+/* ====================================
+   INTERACTIVE BUTTONS
+   ==================================== */
+
+/* Standard Buttons */
 .cc-button {
   background-color: $secondaryContainer;
-  /* primaryContainer */
   color: $primary;
-  /* onPrimaryContainer */
   border-radius: 8px;
   padding: 0.5rem;
   font-weight: bold;
   transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $foreground;
+  }
 }
 
-.cc-button:hover {
-  background-color: $foreground;
-}
-
-.toggle-btn:hover {
-  background-color: $primary;
-}
-
-.toggle-btn.muted {
-  background-color: $error;
-  color: $background;
-}
-
-.toggle-btn.muted:hover {
-  background-color: $primary;
-}
-
-// Estilos dinámicos para los toggles de Wi-Fi y Bluetooth
+/* Toggle Buttons - Dark Mode */
 .toggle-btn {
-  // Estado por defecto (apagado)
-  background-color: $background;
-  color: $primary;
-
   font-size: 34px;
   min-width: 76px;
   min-height: 76px;
   border-radius: 50%;
   transition: all 0.3s ease;
 
-  // Estado: Encendido pero no conectado
-  &.wifi-disconnected,
-  &.bluetooth-on {
+  background-color: $background;
+  color: $primary;
+
+  &:hover {
     background-color: $primary;
     color: $background;
   }
 
-  // Estado: Conectado
+  &.muted {
+    background-color: $onPrimary;
+    color: $primary;
+
+    &:hover {
+      background-color: $primary;
+    }
+  }
+
+  &.wifi-disconnected,
+  &.bluetooth-on {
+    background-color: $primary;
+    color: $background;
+
+    &:hover {
+      background-color: $onPrimary;
+      color: $primary;
+    }
+  }
+
   &.wifi-connected,
   &.bluetooth-connected {
     background-color: $onPrimary;
     color: $primary;
-  }
-}
 
-/* Estilo para el boton de cambio de tema cuando esta activo (modo oscuro) */
-.toggle-btn.active {
-  background-color: $onPrimary;
-  color: $primary;
-}
-
-
-/* Sobreescritura de colores para el Modo Claro */
-.theme-light {
-  .toggle-btn {
-    // Estado por defecto (apagado) en modo claro
-    background-color: $surfaceContainerHigh;
-    color: $surfaceContainerHighest;
-
-    // Estado: Encendido pero no conectado en modo claro
-    &.wifi-disconnected,
-    &.bluetooth-on {
-      background-color: $background;
-      color: $primary;
-    }
-
-    // Estado: Conectado en modo claro
-    &.wifi-connected,
-    &.bluetooth-connected {
+    &:hover {
       background-color: $primary;
       color: $onPrimary;
     }
   }
 
-  /* Asegurarnos de que el boton de tema activo tambien se vea bien en modo claro */
-  .toggle-btn.active {
+  &.active {
     background-color: $onPrimary;
     color: $primary;
+
+    &:hover {
+      background-color: $primary;
+      color: $onPrimary;
+    }
+  }
+}
+
+
+/* ====================================
+   LIGHT THEME OVERRIDES
+   ==================================== */
+
+/* Toggle Buttons - Light Mode */
+.theme-light {
+  .toggle-btn {
+    background-color: $surfaceContainerHigh;
+    color: $surfaceContainerHighest;
+
+    &:hover {
+      background-color: $background;
+      color: $primary;
+    }
+
+    &.muted {
+      background-color: $onPrimary;
+      color: $primary;
+
+      &:hover {
+        background-color: $primary;
+        color: $onPrimary;
+      }
+    }
+
+    &.wifi-disconnected,
+    &.bluetooth-on {
+      background-color: $background;
+      color: $primary;
+
+      &:hover {
+        background-color: $primary;
+        color: $background;
+      }
+    }
+
+    &.wifi-connected,
+    &.bluetooth-connected {
+      background-color: $primary;
+      color: $onPrimary;
+
+      &:hover {
+        background-color: $onPrimary;
+        color: $primary;
+      }
+    }
+
+    &.active {
+      background-color: $onPrimary;
+      color: $primary;
+
+      &:hover {
+        background-color: $primary;
+        color: $onPrimary;
+      }
+    }
   }
 }

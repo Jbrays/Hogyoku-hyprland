@@ -1,10 +1,11 @@
-// 1. Importar colores generados dinamicamente (este no se mueve)
+/* 1. Importar colores generados dinamicamente (este no se mueve) */
 @import "../cache/_variables.scss";
 
-// 2. Importar parciales con la estructura del tema
+/* 2. Importar parciales con la estructura del tema */
 @import "scss/base";
 @import "scss/bar";
 @import "scss/calendar";
 @import "scss/control-center";
 @import "scss/osd";
 @import "scss/music_player";
+@import "scss/battery";

@@ -1,97 +1,111 @@
-/* --- Main Bar Window --- */
+/* ====================================
+   BAR LAYOUT
+   ==================================== */
+
+/* Main Container */
 .eww_bar {
   background-color: $background;
   padding: 0.3rem;
   border-radius: 12px;
 }
 
-/* --- Top Section --- */
+/* Workspace Container */
 .works {
   font-family: "Material Design Icons Desktop";
-  padding: 0.5rem 0.7rem;
+  padding: 0.3rem 0.4rem;
   background-color: $background;
   border-radius: 5px;
 }
 
-.workspace-focused {
-  font-size: 18px;
-  color: $primary;
-  margin: 0.35rem 0;
-}
-
-.workspace-occupied {
-  font-size: 18px;
-  color: $secondaryContainer;
-  margin: 0.35rem 0;
-}
-
-.workspace-empty {
-  font-size: 18px;
-  color: $background;
-  margin: 0.35rem 0;
-}
-
-/* --- Uniform Button Styling --- */
-.bar-button {
-  min-width: 40px;
-  min-height: 40px;
-  font-size: 22px;
-  color: $primary;
-  transition: all 0.3s ease;
-}
-.bar-button:hover {
-  color: $onPrimary;
-}
-
-/* --- Bottom Section --- */
-.clock-wrapper {
-  background-color: $background;
-  border-radius: 5px;
-  padding: 3px;
-}
-
+/* Clock Section - Simplificado sin wrapper */
 .clock-container {
+  background-color: $onBackground;
+  border-radius: 0;
   font-weight: bold;
 }
 
-.clock-hour, .clock-min {
-  font-size: 16px;
+/* Forzar que el boton GTK tampoco tenga border-radius */
+.clock-container button {
+  border-radius: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
+.clock-hour, 
+.clock-min {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* ====================================
+   WORKSPACE INDICATORS
+   ==================================== */
+
+/* Focused Workspace */
+.workspace-focused {
+  font-size: 20px;
+  color: $primary;
+  margin: 0.15rem 0;
+}
+
+/* Occupied Workspace */
+.workspace-occupied {
+  font-size: 20px;
+  color: $secondaryContainer;
+  margin: 0.15rem 0;
+}
+
+/* Empty Workspace */
+.workspace-empty {
+  font-size: 18px;
+  color: $background;
+  margin: 0.15rem 0;
+}
+
+
+/* ====================================
+   INTERACTIVE BUTTONS
+   ==================================== */
+
+/* Base Button Style */
+.bar-button {
+  padding: 0.2rem 0;
+  min-height: 60px;
+  font-size: 35px;
+  color: $primary;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $onPrimary;
+  }
+}
+
+/* Icon-only Button Style */
+.icon-button {
+  min-height: unset;
+  padding: 0;
+  margin: 0;
+}
+
+/* Power Button */
 .power-button {
   color: $primary;
-}
-.power-button:hover {
-  color: $primaryContainer;
-  text-shadow: 0 0 10px $onError;
+
+  &:hover {
+    color: $primaryContainer;
+    text-shadow: 0 0 10px $onError;
+  }
 }
 
-.dashboard-button:hover {
-  color: $primaryContainer;
-}
-
-/* --- System Tray Menu --- */
-.tray menu {
-  padding: 5px;
-  background-color: $background;
-}
-
-.tray menu > menuitem {
-  font-family: "JetBrainsMono NF";
-  font-size: 14px;
-  padding: 2px 5px;
-  color: $error;
-}
-
-.tray menu > menuitem:hover {
-  background-color: $error;
-}
-
-.tray menu > menuitem:disabled label {
-  color: gray;
-}
-
-.tray menu separator {
-  background-color: $error;
-  padding-top: 1px;
+/* Dashboard Button */
+.dashboard-button {
+  border-radius: 0;
+  
+  &:hover {
+    color: $primaryContainer;
+  }
 }

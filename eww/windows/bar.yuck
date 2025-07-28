@@ -6,7 +6,7 @@
 					:y "0%"
 					:anchor "left center"
 					:height "96%"
-					:width "47px")
+					:width "50px")
 	:stacking "fg"
 	:exclusive true
 	:focusable false

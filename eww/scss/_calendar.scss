@@ -1,38 +1,80 @@
-/* --- Calendar --- */
-.calendar-box {
+/* --- Calendar (Estilo Replicado y Adaptado) --- */
+
+.date {
   background-color: $background;
+  color: $onBackground;
   border-radius: 12px;
-  padding: 1.5rem;
-  font-family: "JetBrainsMono NF";
 }
-.time-and-date {
-  color: $primary;
-  margin-bottom: 1rem;
+
+.timebox {
+  margin: 20px 0px; // Margen vertical reducido para hacerlo menos alto
+  .time-container {
+    .content {
+      font-family: "Google Sans", "JetBrainsMono NF";
+      font-weight: bolder;
+      font-size: 3.35em; // Reducido un 7% para ajustar el ancho total
+    }
+    .divider {
+      margin: 8px 15px;
+      padding: 0px 1px;
+      background: linear-gradient($primary, $secondaryContainer, $outline, $surfaceContainerHigh);
+    }
+  }
+  .date-container {
+    font-family: "Google Sans", "JetBrainsMono NF";
+    margin-top: 2px;
+    color: $onSurfaceVariant;
+  }
 }
-.time-big {
-  font-size: 3em;
-  font-weight: bold;
-}
-.date-big {
-  font-size: 1.2em;
-}
-.cal {
-  color: $primary;
+
+.cal-box {
+  font-family: "Google Sans", "JetBrainsMono NF";
+  font-size: 0.95em; // Reducimos ligeramente el tamaño de los dias
   background-color: $surfaceContainer;
-  padding: 1rem;
   border-radius: 12px;
+  padding: 0 0.6rem 1rem 0.6rem; // Aumentado un 2%
+  color: $primary;
+  margin: 0px 12px 12px 12px;
+
+  .cal {
+    background-color: inherit;
+    padding: .5rem;
+    margin-left: 0;
+    letter-spacing: 1px; // Reducido para un espaciado mas sutil
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    & > * {
+      border: solid 0px transparent;
+    }
+  }
 }
-.cal calendar:selected {
-  color: $error;
+
+// Dia seleccionado: ahora con un fondo y tamaño para formar el circulo
+calendar:selected {
+  color: $onBackground;
+  background-color: $primary;
+  border-radius: 100%;
+  font-weight: bold;
+  min-width: 2.2em;
+  min-height: 2.2em;
+  padding: 0; // Reseteamos el padding para que el centrado sea perfecto
 }
-.cal calendar.header {
+
+calendar.header {
+  color: $onSurface;
+  font-weight: 600; // Semibold
+}
+
+calendar.button {
+  color: $onSurfaceVariant;
+}
+
+calendar.highlight {
   color: $primary;
   font-weight: bold;
 }
-.cal calendar.button {
-  color: $primary;
-}
-.cal calendar.highlight {
-  color: $primary;
-  font-weight: bold;
+
+calendar:indeterminate {
+  color: $surfaceContainerHigh;
 }
