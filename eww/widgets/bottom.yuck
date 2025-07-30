@@ -1,0 +1,32 @@
+;; Bottom Widgets ;;
+
+(defwidget bottom []
+  (box :orientation "v"
+       :space-evenly "false"
+       :valign "end"
+       :spacing -2
+    (battery-icon)
+    (clock-vertical)
+    (notifications-icon)
+    (control-center-icon)))
+
+(defwidget control-center-icon []
+  (eventbox :class "icon-button" :onclick "eww --config $HOME/Hogyoku/eww open --toggle control_center_win"
+    (label :text "󰟡")))
+
+(defwidget notifications-icon []
+  (eventbox :class "icon-button" :onclick "" ; TODO: Add notification center command
+    (label :text {has_notifications == "true" ? "󱅫" : ""})))
+
+(defwidget battery-icon []
+  (eventbox :class "icon-button" :onclick ""
+    (box :orientation "v" :space-evenly false :spacing -5
+         :class {battery_percentage < 20 && battery_status != "Charging" ? "low-battery" : ""}
+      (label :text "${battery_percentage}" :class "battery-percentage-text")
+      (label :text {battery_status == "Charging" ? "󰠠" : ""}))))
+
+(defwidget clock-vertical []
+  (eventbox :class "icon-button" :onclick "eww --config $HOME/Hogyoku/eww open --toggle calendar_win"
+    (box :orientation "v" :class "clock" :spacing 0
+      (label :text clock_hour :class "clock-hour")
+      (label :text clock_min :class "clock-minute"))))

@@ -2,7 +2,8 @@
 (defwidget bar []
   (box :class "eww_bar"
        :orientation "v"
-       :vexpand "false"
+       :space-evenly "true"
+       :vexpand "true"
        :hexpand "false"
        (top)
-       (end)))
+       (bottom)))

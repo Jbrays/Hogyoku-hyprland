@@ -5,7 +5,7 @@
       (eventbox :cursor "pointer"
         (button
           :onclick "hyprctl dispatch workspace ${workspace.id}"
-          :class "${workspace.active ? "workspace-focused" : workspace.windows > 0 ? "workspace-occupied" : "workspace-empty"}"
+          :class "${workspace.active ? "workspace-focused" : workspace.windows > 0 ? "workspace-occupied" : "workspace-empty"} ${urgent_ws_name == workspace.name ? "workspace-urgent" : ""}"
           "${workspace.active ? "󰮯" : workspace.windows > 0 ? "󰊠" : "󰑊"}"
         )
       )

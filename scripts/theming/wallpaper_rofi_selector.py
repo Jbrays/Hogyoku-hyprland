@@ -97,6 +97,9 @@ def main():
         print("¡Entorno actualizado con éxito!")
         # Recargar Eww-hogy
         subprocess.run(["eww", "-c", str(HOGYOKU_DIR / "eww"), "reload"])
+        # Reiniciar Dunst para aplicar los nuevos colores
+        subprocess.run(["killall", "dunst"], check=False)  # check=False para no fallar si dunst no está corriendo
+        subprocess.run(["dunst", "&"], shell=True)
     except Exception as e:
         print(f"Un error inesperado ocurrió: {e}", file=sys.stderr)
 

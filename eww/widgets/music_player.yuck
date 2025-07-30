@@ -3,15 +3,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defwidget music-player []
-  (overlay :class "music-player-box"
+  (overlay :class "music-player-box" :vexpand true :hexpand true
     ;; Capa 1: La carátula de fondo
     (box :class "music-cover-bg" 
+         :vexpand true 
+         :hexpand true
          :style "background-image: url('${music_cover_path}');")
 
     ;; Capa 2: El contenido (con el filtro generado por el script)
     (box :class "music-content-layer"
          :orientation "v" 
          :space-evenly false
+         :vexpand true 
+         :hexpand true
          :style "${dynamic_gradient_style}"
       
       ;; --- Información de la Canción (Arriba) ---

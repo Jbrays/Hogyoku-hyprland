@@ -1,4 +1,0 @@
-(defwidget dashboard-button []
-  (eventbox :onclick "${EWW_CMD} open --toggle control_center_win" :cursor "pointer"
-    (box :class "dashboard-button bar-button icon-button"
-      (label :text "󰕮"))))

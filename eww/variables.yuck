@@ -6,30 +6,35 @@
 
 ;; Workspaces
 (defpoll workspaces :interval "120ms" "scripts/WorkSpaces")
+(defvar urgent_ws_name "")
+
 
 ;; Reveal Vars
 (defvar battery_popup_revealed false)
 (defvar pac false)
 (defvar power false)
+(defpoll battery_percentage :interval "10s" "cat /sys/class/power_supply/BAT1/capacity || echo 'N/A'")
+(defpoll battery_status :interval "10s" "cat /sys/class/power_supply/BAT1/status || echo 'Unknown'")
 (defpoll mic_muted :interval "1s" "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q 'yes' && echo 'true' || echo 'false'")
 (defpoll eww_background :interval "10s" "jq -r '.background' ~/Hogyoku/cache/colors.json")
 (defpoll speaker_muted :interval "1s" "pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 'true' || echo 'false'")
 (defpoll wifi_status :interval "5s" "$HOME/Hogyoku/scripts/eww/wifi_status.sh")
 (defpoll bluetooth_status :interval "5s" "$HOME/Hogyoku/scripts/eww/bluetooth_status.sh")
+(defpoll has_notifications :interval "2s" "$HOME/Hogyoku/scripts/eww/check_notifications.sh")
 
 ;; OSD Widgets
 (defvar volume_level 0)
 (defvar volume_muted "false")
 
 ;; Brightness OSD
-(defpoll brightness_level :interval "1s" `echo "scale=2; $(brightnessctl g) / $(brightnessctl m) * 100" | bc`)
+(defvar brightness_level 0)
 (defvar brightness_icon "󰃠")
 
 ;; --- Variables del Reproductor de Música ---
-(defpoll music_title :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh title")
-(defpoll music_artist :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh artist")
-(defpoll music_status_icon :interval "2s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh player_status")
-(defpoll music_cover_path :interval "1s" "echo $HOME/.cache/eww/cover.png")
+(defpoll music_title :interval "1s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh title")
+(defpoll music_artist :interval "1s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh artist")
+(defpoll music_status_icon :interval "1s" "$HOME/Hogyoku/scripts/eww/music/music_metadata.sh player_status")
+(defpoll music_cover_path :interval "2s" "[ -f $HOME/.cache/eww/cover.png ] && echo $HOME/.cache/eww/cover.png || echo $HOME/Hogyoku/assets/music-fallback.png")
 (defpoll dynamic_gradient_style :interval "10s" "$HOME/Hogyoku/scripts/eww/music/generate_gradient.sh")
 
 ;; Variables del Calendario

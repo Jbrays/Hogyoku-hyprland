@@ -3,11 +3,18 @@
 # Cada función es ahora responsable de obtener su propia información,
 # haciendo el script más robusto.
 
-PLAYERS="spotify,%any,firefox,chromium,brave,mpd"
+title() {
+	local TITLE=$(playerctl metadata title 2>/dev/null)
+	if [[ -z "$TITLE" ]]; then
+		echo "Nothing Playing"
+	else
+		echo "$TITLE"
+	fi
+}
 
 artist() {
-	local ARTIST=$(playerctl -p $PLAYERS metadata --format '{{ artist }}' 2>/dev/null)
-	local TITLE=$(playerctl -p $PLAYERS metadata --format '{{ title }}' 2>/dev/null)
+	local ARTIST=$(playerctl metadata artist 2>/dev/null)
+	local TITLE=$(playerctl metadata title 2>/dev/null)
 
 	if [[ "$TITLE" = "Advertisement" ]]; then
 		echo "Spotify Free"
@@ -16,17 +23,8 @@ artist() {
 	fi
 }
 
-title() {
-	local TITLE=$(playerctl -p $PLAYERS metadata --format '{{ title }}' 2>/dev/null)
-	if [[ -z "$TITLE" ]]; then
-		echo "Nothing Playing"
-	else
-		echo "$TITLE"
-	fi
-}
-
 player_status() {
-	local STATUS=$(playerctl -p $PLAYERS status 2>/dev/null)
+	local STATUS=$(playerctl status 2>/dev/null)
 	if [[ "$STATUS" = "Playing" ]]; then
 		echo "󰏤"
 	elif [[ "$STATUS" = "Paused" ]]; then

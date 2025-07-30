@@ -247,6 +247,22 @@ def generate_alacritty_colors_toml(palette):
     except Exception as e:
         print(f"Error al generar los colores de Alacritty (TOML): {e}")
 
+def generate_dunst_config(palette):
+    template_path = os.path.join(TEMPLATES_DIR, "dunstrc.tpl")
+    output_path = os.path.join(CACHE_DIR, "dunstrc")
+    try:
+        with open(template_path, 'r') as f:
+            template_content = f.read()
+        
+        processed_content = template_content
+        for name, hex_color in palette.items():
+            processed_content = processed_content.replace(f'"${name}"', f'"{hex_color}"')
+
+        with open(output_path, 'w') as f:
+            f.write(processed_content)
+    except Exception as e:
+        print(f"Error al generar la configuración de Dunst: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description="Generador de temas dinámicos para Hogyoku.")
     parser.add_argument('--wallpaper', type=str, help="Ruta a la imagen del fondo de pantalla. Si se omite, se usa la paleta en caché.")
@@ -295,6 +311,7 @@ def main():
     generate_rofi_colors(final_palette)
     generate_kitty_colors(final_palette)
     generate_alacritty_colors_toml(final_palette)
+    generate_dunst_config(final_palette)
     if not compile_scss("gtk3.scss", "gtk-3.0.css"): return
     if not compile_scss("gtk4.scss", "gtk-4.0.css"): return
     apply_gtk_theme(args.mode)
@@ -311,6 +328,9 @@ def main():
     alacritty_src = os.path.join(CACHE_DIR, "alacritty-colors.toml")
     alacritty_dst = os.path.join(HOGYOKU_DIR, "config/alacritty/alacritty-colors.toml")
     shutil.copy(alacritty_src, alacritty_dst)
+    dunst_src = os.path.join(CACHE_DIR, "dunstrc")
+    dunst_dst = os.path.join(HOGYOKU_DIR, "config/dunst/dunstrc")
+    shutil.copy(dunst_src, dunst_dst)
 
     print("--- Proceso de Theming de Hogyoku Finalizado ---")
 

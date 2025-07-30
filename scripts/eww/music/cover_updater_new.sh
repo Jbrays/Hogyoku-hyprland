@@ -3,11 +3,14 @@
 # Script para escuchar cambios de canción y actualizar la carátula en segundo plano.
 # Solo actualiza cuando cambia realmente la canción, no con cada evento de metadatos.
 
+PLAYER="spotify,%any,firefox,chromium,brave,mpd"
+LAST_TRACK=""
+
 # Función para obtener identificador único de la canción actual
 get_current_track() {
     local artist title
-    artist=$(playerctl metadata artist 2>/dev/null)
-    title=$(playerctl metadata title 2>/dev/null)
+    artist=$(playerctl -p "$PLAYER" metadata artist 2>/dev/null)
+    title=$(playerctl -p "$PLAYER" metadata title 2>/dev/null)
     echo "${artist}|||${title}"  # Separador único para evitar colisiones
 }
 

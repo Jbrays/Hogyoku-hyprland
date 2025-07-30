@@ -2,22 +2,20 @@
 
 .music-player-box {
   border-radius: 18px;
-  border: 2px solid $error;
 }
-
 
 // La capa que contiene la imagen de fondo
 .music-cover-bg {
   background-size: cover;
   background-position: center;
-  border-radius: inherit; // Hereda el redondeo del padre
+  border-radius: 19px;
 }
 
 // La capa que contiene el contenido y el filtro
 .music-content-layer {
   padding: 1rem;
   // El fondo ahora se define dinámicamente en el archivo .yuck
-  border-radius: 16px; // Hereda el redondeo del padre
+  border-radius: inherit; // Hereda el redondeo del padre
 }
 
 .music-title {

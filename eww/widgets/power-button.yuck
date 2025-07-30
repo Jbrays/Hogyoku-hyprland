@@ -1,2 +1,0 @@
-(defwidget power-button []
-  (button :class "power-button bar-button" :onclick "echo 'Power Menu'" "󰐥"))

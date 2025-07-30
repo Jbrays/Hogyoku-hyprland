@@ -7,15 +7,15 @@ import = [
 size = 12
 
 [font.normal]
-family = "JetBrainsMono"
+family = "Hack Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "JetBrainsMono"
+family = "Hack Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "JetBrainsMono"
+family = "Hack Nerd Font"
 style = "Italic"
 
 [window]

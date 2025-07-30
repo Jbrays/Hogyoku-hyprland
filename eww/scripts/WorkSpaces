@@ -10,6 +10,7 @@ active_id=$($HYPRCTL -j activeworkspace | $JQ -r '.id')
 if [ -n "$output" ] && [ -n "$active_id" ]; then
     echo "$output" | $JQ --argjson active_id "$active_id" -c 'map({
         "id": .id,
+        "name": .name,
         "windows": .windows,
         "active": (.id == $active_id)
     })'

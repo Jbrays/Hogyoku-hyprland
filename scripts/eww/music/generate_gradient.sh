@@ -3,7 +3,7 @@
 # Script para generar un estilo de degradado dinámico para eww
 
 # Leer el color hexadecimal del tema, quitando el '#'
-HEX_COLOR=$(jq -r '.surfaceContainer' "$HOME/Hogyoku/cache/colors.json" | sed 's/#//')
+HEX_COLOR=$(jq -r '.background' "$HOME/Hogyoku/cache/colors.json" | sed 's/#//')
 
 # Si el color no se encuentra, usar un negro por defecto para evitar errores
 if [[ -z "$HEX_COLOR" ]]; then

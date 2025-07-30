@@ -17,30 +17,6 @@
   border-radius: 5px;
 }
 
-/* Clock Section - Simplificado sin wrapper */
-.clock-container {
-  background-color: $onBackground;
-  border-radius: 0;
-  font-weight: bold;
-}
-
-/* Forzar que el boton GTK tampoco tenga border-radius */
-.clock-container button {
-  border-radius: 0;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-
-.clock-hour, 
-.clock-min {
-  font-size: 20px;
-  padding: 0;
-  margin: 0;
-}
-
-
 /* ====================================
    WORKSPACE INDICATORS
    ==================================== */
@@ -49,14 +25,14 @@
 .workspace-focused {
   font-size: 20px;
   color: $primary;
-  margin: 0.15rem 0;
+  margin: 0.10rem 0;
 }
 
 /* Occupied Workspace */
 .workspace-occupied {
   font-size: 20px;
   color: $secondaryContainer;
-  margin: 0.15rem 0;
+  margin: 0.10rem 0;
 }
 
 /* Empty Workspace */
@@ -84,28 +60,68 @@
   }
 }
 
-/* Icon-only Button Style */
+
+/* ====================================
+   BOTTOM WIDGETS
+   ==================================== */
+
+.clock {
+  margin: 0rem 0rem;
+  background-color: $surfaceContainerHigh;
+  border-radius: 8px;
+  padding: 0.2rem 0.1rem;
+}
+
+.clock-hour {
+  color: $error;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.clock-minute {
+  color: $onPrimaryContainer;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .icon-button {
-  min-height: unset;
-  padding: 0;
-  margin: 0;
-}
-
-/* Power Button */
-.power-button {
   color: $primary;
+  font-size: 2.1rem;
+  padding: 0rem;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: $primaryContainer;
-    text-shadow: 0 0 10px $onError;
+    color: $onPrimary;
   }
 }
 
-/* Dashboard Button */
-.dashboard-button {
-  border-radius: 0;
-  
-  &:hover {
-    color: $primaryContainer;
+.icon-button:hover {
+  .clock {
+    background-color: $surfaceContainerHigh;
   }
+}
+
+/* ====================================
+   URGENT WORKSPACE
+   ==================================== */
+
+.workspace-urgent {
+  color: $error;
+  animation: blinking 1s infinite;
+}
+
+.battery-percentage-text {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: $primary;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.icon-button:hover .battery-percentage-text {
+  opacity: 1;
+}
+
+.low-battery {
+  color: $error;
 }

@@ -46,6 +46,10 @@ show_mic_osd() {
 show_brightness_osd() {
     if [ -f "$BRIGHT_PID_FILE" ]; then kill $(cat "$BRIGHT_PID_FILE") 2>/dev/null; fi
 
+    # Obtener nivel de brillo actual y actualizar variable de Eww
+    brightness_level=$(echo "scale=2; $(brightnessctl g) / $(brightnessctl m) * 100" | bc)
+    $EWW_CMD update brightness_level=$brightness_level
+
     if ! $EWW_CMD active-windows | grep -q "brightness_osd"; then
         $EWW_CMD open brightness_osd
     fi
